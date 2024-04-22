@@ -1,6 +1,9 @@
 list_ = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
+    ['X', '~', 'X'],
+    ['X', '~', 'O'],
+    ['~', 'O', '~']
 ]
-for num, item in enumerate(list_):
+
+for i, item in enumerate(list_):
+    if item.count('X') > 1 and '~' in item:
+        print(i)
