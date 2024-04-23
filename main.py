@@ -1,39 +1,11 @@
-
-def update_pole(pole: str) -> None:
-    print(f'| - | 0 | 1 | 2 |')
-    print(f'-'*17)
-    for num, item in enumerate(pole):
-        print(f'| {num} | {" | ".join(item)} |')
-        print(f'-'*17)
-
-def player_move(move: str, pole: list) -> bool:
-    try:
-        move = [int(move[0]), int(move[1])]
-    except ValueError:
-        print("число введено неверно!")
-        return False
-    
-    if 0 <= move[0] <= 2 and 0 <= move[1] <= 2:
-        if pole[move[1]][move[0]] == '~':
-            pole[move[1]][move[0]] = 'X'
-            print("Успешный ход!")
-            return True
-        else:
-            print('Место занято!')
-            return False
-    else:
-        print("число введено неверно!")
-        return False
-    
-def robot_move(pole: list) -> None:
-    for num, item in enumerate(pole):
-        
+from move import robot_move, player_move
+from pole import update_pole
 
 def game() -> None:
-    print('-'*15)
+    print('-'*17)
     print('Чтобы сделать ход, введи двухзначное число.')
-    print('Первая цифра числа - номер столбца.')
-    print('Вторая цифра числа - номер строки.')
+    print('Первая цифра числа - номер строки.')
+    print('Вторая цифра числа - номер столбца.')
     print('Например: 12')
     print(f'-'*17)
     end = False
@@ -43,9 +15,14 @@ def game() -> None:
         ['~','~','~']
     ]
     while not end:
-        update_pole(pl)
+        end = update_pole(pl)
+        if end: break
         while not player_move(input('Твой ход: '), pl):
             print(f'-'*17)
+        end = update_pole(pl)
+        if end: break
+        print(f'Ход соперника: {robot_move(pl)}')
+        print(f'-'*17)
 
 
 def rules() -> None:
