@@ -1,4 +1,4 @@
-def robot_move(pole: list) -> None:
+def robot_move(pole: list) -> str:
     list_y = [
         [pole[0][0], pole[1][0], pole[2][0]],
         [pole[0][1], pole[1][1], pole[2][1]],
